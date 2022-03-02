@@ -9,7 +9,7 @@ import static java.lang.System.out;
 public class DependencyInjectionExample {
     public static void main(String[] args) {
         ApplicationContext context =
-                new ClassPathXmlApplicationContext("parentbean.xml");
+                new ClassPathXmlApplicationContext("config/parentbean.xml");
         Parent parent = context.getBean("parent", Parent.class);
 
         out.println(parent);

@@ -9,7 +9,7 @@ import static java.lang.System.out;
 public class GetBeanExample {
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext(
-                "employeebean.xml");
+                "config/employeebean.xml");
 
         Employee employee1 = context.getBean(
                 "employee1", Employee.class);

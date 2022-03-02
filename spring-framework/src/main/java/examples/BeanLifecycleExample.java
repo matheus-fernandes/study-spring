@@ -16,7 +16,7 @@ public class BeanLifecycleExample {
     }
 
     static ClassPathXmlApplicationContext getContext(){
-        return new ClassPathXmlApplicationContext("personbean.xml");
+        return new ClassPathXmlApplicationContext("config/personbean.xml");
     }
 
     static Person getPerson(ApplicationContext context){
