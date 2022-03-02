@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util.xsd"
+>
+    <bean id="person" class="beans.Person">
+        <constructor-arg name="name" value="Bob"/>
+    </bean>
+    <bean id="service" class="services.PersonService">
+        <constructor-arg name="person" ref="person"/>
+    </bean>
+
+    <bean id="methodBeforeInterceptor" class="interceptors.BeforeInterceptor"/>
+    <bean id="afterReturningInterceptor" class="interceptors.AfterInterceptor"/>
+    <bean id="aroundInterceptor" class="interceptors.AroundInterceptor"/>
+
+    <bean id="proxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="target" ref="service"/>
+        <property name="interceptorNames">
+            <list>
+                <value>methodBeforeInterceptor</value>
+                <value>afterReturningInterceptor</value>
+                <value>aroundInterceptor</value>
+            </list>
+        </property>
+    </bean>
+
+</beans>
+
+
