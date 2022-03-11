@@ -1,0 +1,48 @@
+study:
+  welcome:
+    message: Hello World!!!
+
+server:
+  port: 8030
+
+spring:
+  profiles:
+    active: dev
+
+---
+
+spring:
+  profiles: dev
+  welcome:
+    message: Hello World Dev!!!
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: user_study_spring_boot
+    url: jdbc:mysql://localhost:3306/db_study_spring_boot
+    password: '!ussb123pwd'
+  jpa:
+    hibernate:
+      ddL-auto: update
+    show-sql: 'true'
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        exclude: "env, beans"
+
+---
+
+spring:
+  profiles: prod
+  welcome:
+    message: Hello World Friend!!!
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: user_study_spring_boot
+    url: jdbc:mysql://localhost:3306/db_study_spring_boot_prod
+    password: '!ussb123pwd'
+  jpa:
+    hibernate:
+      ddL-auto: update
