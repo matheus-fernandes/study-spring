@@ -11,6 +11,8 @@ import javax.validation.constraints.NotBlank;
 import static com.study.springboot.message.DepartmentValidationMessage.*;
 import static javax.persistence.GenerationType.*;
 
+
+
 @Data
 @Entity
 @Builder
