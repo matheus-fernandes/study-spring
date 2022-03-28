@@ -1,0 +1,49 @@
+<html>
+<head>
+    <title>Login</title>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div id="login" th:unless="${isLogged}">
+        <label>Login with:</label> <br>
+        <a href="/oauth2/authorization/github">GitHub</a> <br>
+        <a href="/oauth2/authorization/google">Google</a> <br>
+    </div>
+    <br>
+    <div id="logged" th:if="${isLogged}">
+        <label>Hello <span th:text="${userName}"></span>!</label> <br>
+        <a href="#" onclick="logout()">Logout</a>
+    </div>
+    <script>
+        axios.interceptors.request.use(
+            function (config){
+                return {
+                    ...config,
+                    headers: {
+                        'X-XSRF-TOKEN': getCookie("XSRF-TOKEN")
+                    }
+                }
+            },
+            function (error) {
+                Promise.reject(error)
+            }
+        )
+
+        function logout(){
+            axios.post('/logout')
+                .then(function(){
+                    document.location.reload(true)
+                })
+                .catch(console.error)
+        }
+
+        function getCookie(name) {
+            var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+            if (match) return match[2];
+        }
+
+
+    </script>
+</body>
+</html>
